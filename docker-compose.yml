@@ -1,0 +1,21 @@
+# Remember to change all instances of 'wp_' when starting on a new project. 
+versions: '3'
+
+services:
+
+    wp_app:
+        image: wordpress:4-php5.6
+        container: wp_app
+        volumes:
+            - ${PWD}/wp-content/:/var/www/html/wp-content
+            - ${PWD}/local-config.php:/wp-config.php
+        ports:
+            - 8080:80
+
+    wp_mysql:
+        image: mysql:5.6
+        container_name: wp_mysql
+        volumes:
+            - ${PWD}/dump/:/home/dump
+        environment:
+            MYSQL_ROOT_PASSWORD: devsu
